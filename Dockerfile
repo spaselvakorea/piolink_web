@@ -4,7 +4,7 @@ FROM tiangolo/uwsgi-nginx-flask:python3.8
 ENV STATIC_INDEX 1
 # ENV STATIC_INDEX 0
 
-ENV STATIC_PATH /app/static/main
+#ENV STATIC_PATH /app/static/main
 
 COPY ./requirements.txt /app/requirements.txt
 
