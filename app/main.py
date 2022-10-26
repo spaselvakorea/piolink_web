@@ -61,7 +61,7 @@ def login():
             id = username
             user = User(id)
             login_user(user)
-            return redirect('/')
+            return redirect('/main/index.html')
         else:
             return abort(401)
     else:
