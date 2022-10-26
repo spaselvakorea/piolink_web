@@ -290,8 +290,72 @@ $("#permitEmailAlert").on('click', function(){
 	}
 })
 
+function addWidget(data)
+{
+	console.log(data);
+	var val = (data[11] === "Y" || data[12] === "Y" || data[10] < 0.6 || data[8] == 1) ? 'detected' : 'normal';
+	var widg = `
+	<!-- BEGIN web-monitoring card -->
+	<div class="content-web-card col-xxl-3 col-xl-4 pb-4">
+		<!-- BEGIN card -->
+		<div class="card h-100 hand">
+			<div class="card-body h-100 p-1">
+				<a href="#" class="pos-product">
+					<div class="img" style="background-image: url(`+'https://125.7.199.176/static/screenshots/'+data[4]+`)"></div>
+					<div class="info">
+						<div class="d-flex justify-content-between">
+							<div class="title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">`+data[2]+`</font></font></div>
+							<div class="dropdown">
+								<button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+									<i class="bi bi-gear-fill"></i>
+								</button>
+								<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style="">
+									<li class="d-flex flex-column px-2">
+										<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalModify"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">correction</font></font></button>
+						
+										<button type="button" class="btn btn-danger mt-2 message-delete"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">delete</font></font></button>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="desc"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Address: `+data[3]+`</font></font></div>
+						<div class=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Anomaly Detection: `+val+`</font></font></div>
+					</div>
+				</a>
+			</div>
+			<div class="card-arrow">
+				<div class="card-arrow-top-left"></div>
+				<div class="card-arrow-top-right"></div>
+				<div class="card-arrow-bottom-left"></div>
+				<div class="card-arrow-bottom-right"></div>
+			</div>
+		</div>
+		<!-- END card -->
+	</div>
+	<!-- END web-monitoring card -->
+	`;
+	//console.log(widg);
+	$("#widgetpanel").append(widg);
+}
+
 //예외 적용 button click 시 상태 표시 정상 or 예외 event
 $(document).ready(function(){
+	//addWidget();
+	$.ajax({
+		url: 'http://localhost:8086/sites',
+		type: 'GET',
+		success: function (data) {
+		  	window.maryadb_data = data;
+		  	console.log(window.maryadb_data.length);
+		  	for (let i = 0; i < window.maryadb_data.length; i++) {
+				addWidget(window.maryadb_data[i]);
+			}
+		},
+		error: function (data) {
+		  debugger;
+		  alert("Error");
+		}
+	});
 	$('.exception-permit-btn').on('click', function() {
 		//예외 승인 & 다음 UI
 		if($(this).hasClass('btn-danger')) {
