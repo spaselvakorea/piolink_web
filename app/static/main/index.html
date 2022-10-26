@@ -98,7 +98,7 @@
 							</table>
 						</div>
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item d-flex align-items-center" href="../logout">LOGOUT <i class="bi bi-toggle-off ms-auto text-theme fs-16px my-n1"></i></a>
+						<a class="dropdown-item d-flex align-items-center" href="../main/login.html">LOGOUT <i class="bi bi-toggle-off ms-auto text-theme fs-16px my-n1"></i></a>
 					</div>
 				</div>
 			</div>
@@ -316,43 +316,6 @@
 			<div class="row">
 				<!-- left side section -->
 				<section class="col-6">
-					<!-- BEGIN col-12 -->
-					<div class="col-12">
-						<!-- BEGIN card -->
-						<div class="card mb-3">
-							<!-- BEGIN card-body -->
-							<div class="card-body">
-								<ul class="d-flex align-items-center mb-0">
-									<li class="flex-shrink-0">
-										<button class="btn btn-sm btn-secondary" type="button">최근 24시간</button>
-									</li>
-									<li class="mx-2 flex-grow-1">
-										<div class="input-group input-daterange" id="datepicker">
-											<input type="text" class="form-control" name="start" placeholder="start date" />
-											<span class="input-group-text">to</span>
-											<input type="text" class="form-control" name="end" placeholder="end date" />
-										</div>
-									</li>
-									<li class="flex-shrink-0">
-										<button class="btn btn-sm btn-success">검색</button>
-									</li>
-								</ul>
-							</div>
-							<!-- END card-body -->
-
-							<!-- BEGIN card-arrow -->
-							<div class="card-arrow">
-								<div class="card-arrow-top-left"></div>
-								<div class="card-arrow-top-right"></div>
-								<div class="card-arrow-bottom-left"></div>
-								<div class="card-arrow-bottom-right"></div>
-							</div>
-							<!-- END card-arrow -->
-
-						</div>
-						<!-- END card -->
-					</div>
-					<!-- END col-12 -->
 					<!-- BEGIN row -->
 					<div class="row">
 						<!-- 수집 현황
@@ -369,7 +332,6 @@
 									<!-- END title -->
 									<!-- BEGIN content -->
 									<ul class="collection-condition mt-2 d-flex justify-content-around" style="text-align:center;">
-
 										<li>
 											<h3 class="badge mb-0">
 												<div>사이버 위협 정보</div>
@@ -377,22 +339,20 @@
 											</h3>
 											<h4 class="rounded-bottom py-1 flex-column">
 												<div>
-													<span class="h6 me-2">URI:</span>12,000
+													<span class="h6 me-2">URI:</span><span id="spnCrawlUrlCnt" />
 												</div>
 												<div>
-													<span class="h6 me-2">File:</span>12
+													<span class="h6 me-2">File:</span><span id="spnCrawlFileCnt" />
 												</div>
 											</h4>
 										</li>
-
 										<li>
 											<h3 class="badge mb-0">
 												<div>웹 위/변조 모니터링</div>
 												<span class="badge bg-secondary mb-0 ms-1 mt-1">(URL Hunter)</span>
 											</h3>
-											<h4 class="rounded-bottom py-1"><span class="h6 me-2">URI:</span> 12,000</h4>
+											<h4 class="rounded-bottom py-1"><span class="h6 me-2">URI:</span><span id="spnUrlHunterCnt" /></h4>
 										</li>
-
 										<!-- <li>
 											<h3 class="badge mb-0">
 												<div>사고 분석</div>
@@ -400,12 +360,10 @@
 											</h3>
 											<h4 class="rounded-bottom py-1"><span class="h6 me-2">File:</span> 12</h4>
 										</li> -->
-
 										<li>
 											<h3 class="badge mb-0">수동 파일 분석</h3>
-											<h4 class="rounded-bottom py-1"><span class="h6 me-2">File:</span> 12</h4>
+											<h4 class="rounded-bottom py-1"><span class="h6 me-2">File:</span> 0</h4>
 										</li>
-
 									</ul>
 								<!-- END content -->
 							</div>
@@ -425,83 +383,72 @@
 					</div>
 					<!-- END row -->
 
-					<!-- BEGIN row -->
-					<div class="row">
-						<!-- 연동 데이터 
-							BEGIN col-12 -->
-						<div class="col-xl-12">
-							<!-- BEGIN card -->
-							<div class="card mb-3">
-								<!-- BEGIN card-body -->
-								<div class="card-body" style="height: 159px;">
-									<section class="row">
-										<article class="col-6">
-											<div class="d-flex fw-bold small">
-												<span class="flex-grow-1">FILE 분석</span>
-											</div>
-											<!-- BEGIN content -->
-											<ul class="file-analisys mt-2 d-flex justify-content-between" style="text-align:center;">
-												<li>
-													<h3 class="badge mb-0">수집 파일</h3>
-													<h4 class="rounded-bottom py-1 mt-2">12</h4>
-												</li>
-		
-												<li class="mx-2">
-													<h3 class="badge mb-0">행위 분석중</h3>
-													<h4 class="rounded-bottom py-1 mt-2">12</h4>
-												</li>
-		
-												<li class="me-2">
-													<h3 class="badge mb-0">AI 분석중</h3>
-													<h4 class="rounded-bottom py-1 mt-2">12</h4>
-												</li>
-		
-												<li>
-													<h3 class="badge mb-0">분석 완료</h3>
-													<h4 class="rounded-bottom py-1 mt-2">12</h4>
-												</li>
-											</ul>
-											<!-- END content -->
-										</article>
-										<article class="col-6">
-											<div class="d-flex fw-bold small">
-												<span class="flex-grow-1">URI 분석</span>
-											</div>
-											<!-- BEGIN content -->
-											<ul class="file-analisys mt-2 d-flex justify-content-between" style="text-align:center;">
-												<li>
-													<h3 class="badge mb-0">수집 URL</h3>
-													<h4 class="rounded-bottom py-1 mt-2">12</h4>
-												</li>
-			
-												<li class="mx-2"> 
-													<h3 class="badge mb-0">행위 분석중</h3>
-													<h4 class="rounded-bottom py-1 mt-2">12</h4>
-												</li>
-			
-												<li>
-													<h3 class="badge mb-0">분석 완료</h3>
-													<h4 class="rounded-bottom py-1 mt-2">12</h4>
-												</li>
-											</ul>
-										</article>
-									</section>
-								</div>
-								<!-- END card-body -->
-			
-								<!-- BEGIN card-arrow -->
-								<div class="card-arrow">
-									<div class="card-arrow-top-left"></div>
-									<div class="card-arrow-top-right"></div>
-									<div class="card-arrow-bottom-left"></div>
-									<div class="card-arrow-bottom-right"></div>
-								</div>
-								<!-- END card-arrow -->
-
-							</div>
-						</div>
-					</div>
-					<!-- END row -->
+												<!-- BEGIN card -->
+												<div class="card mb-3">
+													<!-- BEGIN card-body -->
+													<div class="card-body">
+														<div class="d-flex fw-bold small mb-2">
+															<span class="flex-grow-1">AI 분석 예측 결과</span>
+														</div>
+														
+														<section>
+															<article class="content-ai-analisys">
+																<ul class="d-flex">
+																	<li class="w-50">
+																		<div class="chart-ai-analisys">
+																			<canvas id="pieChart"></canvas>
+																		</div>
+																		<!-- <canvas id="chart"></canvas> -->
+																	</li>
+																	<li class="w-50">
+																		<div class="chart-ai-analisys">
+																			<canvas id="pieChart2"></canvas>
+																		</div>
+																	</li>
+																</ul>
+															</article>
+						
+															<!-- <table class="table table-sm mb-0 text-center w-50" style="font-size: 12px;">
+																<thead class="table-dark">
+																	<tr>
+																		<th>#</th>
+																		<th>공격 유형</th>
+																		<th>건수</th>
+																	</tr>
+																</thead>
+																<tbody>
+																	<tr>
+																		<td>1</td>
+																		<td>test</td>
+																		<td>1,234</td>
+																	</tr>
+																	<tr>
+																		<td>2</td>
+																		<td>test</td>
+																		<td>1,234</td>
+																	</tr>
+																	<tr>
+																		<td>3</td>
+																		<td>test</td>
+																		<td>1,234</td>
+																	</tr>
+																</tbody>
+															</table> -->
+														</section>
+					
+													</div>
+													<!-- END card-body -->
+					
+													<!-- BEGIN card-arrow -->
+													<div class="card-arrow">
+														<div class="card-arrow-top-left"></div>
+														<div class="card-arrow-top-right"></div>
+														<div class="card-arrow-bottom-left"></div>
+														<div class="card-arrow-bottom-right"></div>
+													</div>
+													<!-- END card-arrow -->
+												</div>
+												<!-- END card -->
 											
 					<!-- BEGIN row -->
 					<div class="row">
@@ -517,44 +464,44 @@
 									<div class="d-flex fw-bold small mb-3">
 										<span class="flex-grow-1">웹 위/변조 모니터링</span>
 										<ul>
-											<li class="text-success">모니터링: 3</li>
-											<li class="text-danger">웹 위/변조 모니터링: 1</li>
+											<li class="text-success">모니터링: <span id="spnUrlHunterDetectCount"></span></li>
+											<li class="text-danger">웹 위/변조 모니터링: <span id="spnUrlHunterNormalCount"></span></li>
 										</ul>
 									</div>
 									<!-- END title -->
 									<article class="web-monitoring">
 										<ul style="margin-top: 22px;">
 											<li class="hand" data-bs-toggle="modal" data-bs-target="#screenDetail">
-												<div class="border-danger"></div>
-												<h6>ABC 마트</h6>
+												<div id="divUrlHunterDataStatus1" class="border-danger"></div>
+												<h6><span id="spnUrlHunterDataName1"></span></h6>
 											</li>
 											<li class="hand" data-bs-toggle="modal" data-bs-target="#screenDetail">
-												<div class="border-success"></div>
-												<h6>ABC 마트</h6>
+												<div id="divUrlHunterDataStatus2" class="border-success"></div>
+												<h6><span id="spnUrlHunterDataName2"></span></h6>
 											</li>
 											<li class="hand" data-bs-toggle="modal" data-bs-target="#screenDetail">
-												<div class="border-success"></div>
-												<h6>ABC 마트</h6>
+												<div id="divUrlHunterDataStatus3" class="border-success"></div>
+												<h6><span id="spnUrlHunterDataName3"></span></h6>
 											</li>
 											<li class="hand" data-bs-toggle="modal" data-bs-target="#screenDetail">
-												<div class="border-success"></div>
-												<h6>ABC 마트</h6>
+												<div id="divUrlHunterDataStatus4" class="border-success"></div>
+												<h6><span id="spnUrlHunterDataName4"></span></h6>
 											</li>
 											<li class="hand" data-bs-toggle="modal" data-bs-target="#screenDetail">
-												<div class="border-success"></div>
-												<h6>ABC 마트</h6>
+												<div id="divUrlHunterDataStatus5" class="border-success"></div>
+												<h6><span id="spnUrlHunterDataName5"></span></h6>
 											</li>
 											<li class="hand" data-bs-toggle="modal" data-bs-target="#screenDetail">
-												<div class="border-success"></div>
-												<h6>ABC 마트</h6>
+												<div id="divUrlHunterDataStatus6" class="border-success"></div>
+												<h6><span id="spnUrlHunterDataName6"></span></h6>
 											</li>
 											<li class="hand" data-bs-toggle="modal" data-bs-target="#screenDetail">
-												<div class="border-success"></div>
-												<h6>ABC 마트</h6>
+												<div id="divUrlHunterDataStatus7" class="border-success"></div>
+												<h6><span id="spnUrlHunterDataName7"></span></h6>
 											</li>
 											<li class="hand" data-bs-toggle="modal" data-bs-target="#screenDetail">
-												<div class="border-success"></div>
-												<h6>ABC 마트</h6>
+												<div id="divUrlHunterDataStatus8" class="border-success"></div>
+												<h6><span id="spnUrlHunterDataName8"></span></h6>
 											</li>
 										</ul>
 									</article>
@@ -586,6 +533,84 @@
 						<!-- BEGIN col-12 -->
 						<div class="col-12">
 
+												<!-- BEGIN row -->
+					<div class="row">
+						<!-- 연동 데이터 
+							BEGIN col-12 -->
+						<div class="col-xl-12">
+							<!-- BEGIN card -->
+							<div class="card mb-3">
+								<!-- BEGIN card-body -->
+								<div class="card-body" style="height: 177px;">
+									<section class="row">
+										<article class="col-6">
+											<div class="d-flex fw-bold small">
+												<span class="flex-grow-1">FILE 분석</span>
+											</div>
+											<!-- BEGIN content -->
+											<ul class="file-analisys mt-2 d-flex justify-content-between" style="text-align:center;">
+												<li>
+													<h3 class="badge mb-0">수집 파일</h3>
+													<h4 class="rounded-bottom py-1 mt-2"><span id="spnAnalysisWaitingFileCount" /></h4>
+												</li>
+		
+<!--												<li class="mx-2">-->
+<!--													<h3 class="badge mb-0">행위 분석중</h3>-->
+<!--													<h4 class="rounded-bottom py-1 mt-2">12</h4>-->
+<!--												</li>-->
+		
+												<li class="me-2">
+													<h3 class="badge mb-0">분석중</h3>
+													<h4 class="rounded-bottom py-1 mt-2"><span id="spnAnalysisConsumingFileCount" /></h4>
+												</li>
+		
+												<li>
+													<h3 class="badge mb-0">분석 완료</h3>
+													<h4 class="rounded-bottom py-1 mt-2"><span id="spnAnalysisCompleteFileCount" /></h4>
+												</li>
+											</ul>
+											<!-- END content -->
+										</article>
+										<article class="col-6">
+											<div class="d-flex fw-bold small">
+												<span class="flex-grow-1">URI 분석</span>
+											</div>
+											<!-- BEGIN content -->
+											<ul class="file-analisys mt-2 d-flex justify-content-between" style="text-align:center;">
+												<li>
+													<h3 class="badge mb-0">수집 URL</h3>
+													<h4 class="rounded-bottom py-1 mt-2"><span id="spnAnalysisWaitingUrlCount" /></h4>
+												</li>
+			
+												<li class="mx-2"> 
+													<h3 class="badge mb-0">분석중</h3>
+													<h4 class="rounded-bottom py-1 mt-2"><span id="spnAnalysisConsumingUrlCount" /></h4>
+												</li>
+			
+												<li>
+													<h3 class="badge mb-0">분석 완료</h3>
+													<h4 class="rounded-bottom py-1 mt-2"><span id="spnAnalysisCompleteUrlCount" /></h4>
+												</li>
+											</ul>
+										</article>
+									</section>
+								</div>
+								<!-- END card-body -->
+			
+								<!-- BEGIN card-arrow -->
+								<div class="card-arrow">
+									<div class="card-arrow-top-left"></div>
+									<div class="card-arrow-top-right"></div>
+									<div class="card-arrow-bottom-left"></div>
+									<div class="card-arrow-bottom-right"></div>
+								</div>
+								<!-- END card-arrow -->
+
+							</div>
+						</div>
+					</div>
+					<!-- END row -->
+
 							<!-- 시스템 정보 BEGIN card -->
 							<div class="card mb-3">
 								<!-- BEGIN card-body -->
@@ -597,25 +622,25 @@
 									<div class="col-lg-12">
 										<div class="d-flex justify-content-around">
 											<div>
-												<h6 class="text-center">CPU : 4Core (2.4Ghz)</h6>
+												<h6 class="text-center">CPU : <span id="spnCpuInfo"/></h6>
 												<figure class="highchart-cpu">
 													<div id="container"></div>
 												</figure>
 											</div>
 											<div>
-												<h6 class="text-center">RAM : 12GB/16GB</h6>
+												<h6 class="text-center">RAM : <span id="spnMemoryInfo"/></h6>
 												<figure class="highchart-cpu">
 													<div id="container2"></div>
 												</figure>
 											</div>
 											<div>
-												<h6 class="text-center">Network Traffic</h6>
+												<h6 class="text-center">Network <span id="spnNetworkInfo"/></h6>
 												<figure class="highchart-cpu">
 													<div id="container3"></div>
 												</figure>
 											</div>
 											<div>
-												<h6 class="text-center">DISK Info</h6>
+												<h6 class="text-center">DISK <span id="spnDiskInfo"/></h6>
 												<figure class="highchart-cpu">
 													<div id="container4"></div>
 												</figure>
@@ -628,10 +653,10 @@
 										<article>
 											<h6 class="text-center">행위 분석 시스템</h6>
 											<ul class="d-flex">
-												<li class="active">
+												<li class="active" id="liZzeroSystemStatus_normal">
 													<p>정상</p>
 												</li>
-												<li>
+												<li id="liZzeroSystemStatus_error">
 													<p>장애</p>
 												</li>
 											</ul>
@@ -641,10 +666,10 @@
 										<article>
 											<h6 class="text-center">AI 파일 분석 시스템</h6>
 											<ul class="d-flex">
-												<li class="active">
+												<li class="active" id="liAiFileSystemStatus_normal">
 													<p>정상</p>
 												</li>
-												<li>
+												<li id="liAiFileSystemStatus_error">
 													<p>장애</p>
 												</li>
 											</ul>
@@ -654,90 +679,15 @@
 										<article>
 											<h6 class="text-center">AI URL 분석</h6>
 											<ul class="d-flex">
-												<li>
+												<li id="liAiUrlSystemStatus_normal">
 													<p>정상</p>
 												</li>
-												<li class="active">
+												<li class="active" id="liAiUrlSystemStatus_error">
 													<p>장애</p>
 												</li>
 											</ul>
 										</article>
 									</div>
-
-								</div>
-								<!-- END card-body -->
-
-								<!-- BEGIN card-arrow -->
-								<div class="card-arrow">
-									<div class="card-arrow-top-left"></div>
-									<div class="card-arrow-top-right"></div>
-									<div class="card-arrow-bottom-left"></div>
-									<div class="card-arrow-bottom-right"></div>
-								</div>
-								<!-- END card-arrow -->
-							</div>
-							<!-- END card -->
-
-							<!-- BEGIN card -->
-							<div class="card mb-3">
-								<!-- BEGIN card-body -->
-								<div class="card-body">
-									<div class="d-flex fw-bold small mb-2">
-										<span class="flex-grow-1">AI 분석 예측 결과</span>
-									</div>
-									
-									<section class="d-flex">
-										<article class="content-ai-analisys w-50">
-											<ul class="d-flex">
-												<li class="w-50">
-													<div class="chart-ai-analisys">
-														<canvas id="doughnutChart"></canvas>
-														<div class="label-text">
-															93.1
-														</div>
-														<h6 class="text-center mb-0">유사도</h6>
-													</div>
-													<!-- <canvas id="chart"></canvas> -->
-												</li>
-												<li class="w-50">
-													<div class="chart-ai-analisys">
-														<canvas id="doughnutChart2"></canvas>
-														<div class="label-text">
-															11
-														</div>
-														<h6 class="text-center mb-0">스코어</h6>
-													</div>
-												</li>
-											</ul>
-										</article>
-	
-										<table class="table table-sm mb-0 text-center w-50" style="font-size: 12px;">
-											<thead class="table-dark">
-												<tr>
-													<th>#</th>
-													<th>공격 유형</th>
-													<th>건수</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>1</td>
-													<td>test</td>
-													<td>1,234</td>
-												</tr>
-												<tr>
-													<td>2</td>
-													<td>test</td>
-													<td>1,234</td>
-												</tr>
-												<tr>
-													<td>3</td>
-													<td>test</td>
-													<td>1,234</td>
-												</tr>
-											</tbody>
-										</table>
-									</section>
 
 								</div>
 								<!-- END card-body -->
@@ -759,23 +709,23 @@
 								BEGIN col-6 -->
 								<div class="col-5">
 									<!-- BEGIN card -->
-									<div class="card" style="height: 402px;">
+									<div class="card" style="height: 409px;">
 										<!-- BEGIN card-body -->
 										<div class="card-body">
 											<!-- BEGIN title -->
 											<div class="d-flex fw-bold small mb-3">
 												<span class="flex-grow-1">사이버 위협 정보</span>
 												<ul>
-													<li class="text-success">정상: 3</li>
-													<li class="text-danger">장애: 1 (OSINT3)</li>
+													<li class="text-success">정상: <span id="spnCrawlerServerNormalCount"/></li>
+													<li class="text-danger">장애: <span id="spnCrawlerServerErrorCount"/></li>
 												</ul>
 											</div>
 											<!-- END title -->
 											<article class="content-cyber-info mt-4">
 												<ul>
-													<li class="badge bg-success">OSINT1</li>
-													<li class="badge bg-success mx-3">OSINT2</li>
-													<li class="badge bg-danger">OSINT3</li>
+													<li id="liUrlCrawlerStatus" class="badge bg-success">A</li>
+													<li id="liFileCrawlerStatus" class="badge bg-success mx-3">B</li>
+													<li id="liUrlHunterStatus" class="badge bg-danger">C</li>
 												</ul>
 												<h6 class="d-flex flex-column align-items-center">
 													<i class="fa-solid fa-bug"></i>
@@ -789,47 +739,25 @@
 														<tr>
 															<th>#</th>
 															<th>이름</th>
-															<th>IP</th>
-															<th>Domain</th>
-															<th>File</th>
+															<th>-</th>
 														</tr>
 													</thead>
 													<tbody>
 														<tr>
-															<td>1</td>
-															<td>test</td>
-															<td>1,234</td>
-															<td>1,234</td>
-															<td>1,234</td>
+															<td>A</td>
+															<td>URL Crawler</td>
+															<td>URL 수집기</td>
 														</tr>
 														<tr>
-															<td>2</td>
-															<td>test</td>
-															<td>1,234</td>
-															<td>1,234</td>
-															<td>1,234</td>
+															<td>B</td>
+															<td>File Crawler</td>
+															<td>File 수집기</td>
 														</tr>
 														<tr>
-															<td>3</td>
-															<td>test</td>
-															<td>1,234</td>
-															<td>1,234</td>
-															<td>1,234</td>
+															<td>C</td>
+															<td>URL Hunter</td>
+															<td>URL 모니터링</td>
 														</tr>
-														<!-- <tr>
-															<td>4</td>
-															<td>test</td>
-															<td>1,234</td>
-															<td>1,234</td>
-															<td>1,234</td>
-														</tr>
-														<tr>
-															<td>5</td>
-															<td>test</td>
-															<td>1,234</td>
-															<td>1,234</td>
-															<td>1,234</td>
-														</tr> -->
 													</tbody>
 												</table>
 											</div>
@@ -853,7 +781,7 @@
 								<!-- 사고 분석 section -->
 								<section class="col-7">
 									<!-- BEGIN card -->
-									<div class="card mb-3">
+									<div class="card mb-3" style="height: 409px;">
 										<!-- BEGIN card-body -->
 										<div class="card-body">
 											<div class="d-flex fw-bold small mb-0">
@@ -876,27 +804,21 @@
 												<tbody>
 													<tr>
 														<td>AntiVirus</td>
-														<td>Backdoor <span class="badge bg-secondary">89</span></td>
-														<td>Worm <span class="badge bg-secondary">89</span></td>
-														<td>Trojan <span class="badge bg-secondary">89</span></td>
+														<td><span id="spnAntivirusName1"></span> <span id="spnAntivirusCnt1" class="badge bg-secondary"></span></td>
+														<td><span id="spnAntivirusName2"></span> <span id="spnAntivirusCnt2" class="badge bg-secondary"></span></td>
+														<td><span id="spnAntivirusName3"></span> <span id="spnAntivirusCnt3" class="badge bg-secondary"></span></td>
 													</tr>
 													<tr>
 														<td>정적 분석</td>
-														<td>Zombie.. <span class="badge bg-secondary">89</span></td>
-														<td>Incodi.. <span class="badge bg-secondary">89</span></td>
-														<td>Blackl.. <span class="badge bg-secondary">89</span></td>
-													</tr>
-													<tr>
-														<td>동적 분석</td>
-														<td>NoSign.. <span class="badge bg-secondary">89</span></td>
-														<td>Fileless.. <span class="badge bg-secondary">89</span></td>
-														<td>Rans.. <span class="badge bg-secondary">89</span></td>
+														<td><span id="spnYaraName1"></span> <span id="spnYaraCnt1" class="badge bg-secondary"></span></td>
+														<td><span id="spnYaraName2"></span> <span id="spnYaraCnt2" class="badge bg-secondary"></span></td>
+														<td><span id="spnYaraName3"></span> <span id="spnYaraCnt3" class="badge bg-secondary"></span></td>
 													</tr>
 													<tr>
 														<td>AI 분석예측</td>
-														<td>Backdoor <span class="badge bg-secondary">89</span></td>
-														<td>Worm <span class="badge bg-secondary">89</span></td>
-														<td>Trojan <span class="badge bg-secondary">89</span></td>
+														<td><span id="spnAiName1"></span> <span id="spnAiCnt1" class="badge bg-secondary"></span></td>
+														<td><span id="spnAiName2"></span> <span id="spnAiCnt2" class="badge bg-secondary"></span></td>
+														<td><span id="spnAiName3"></span> <span id="spnAiCnt3" class="badge bg-secondary"></span></td>
 													</tr>
 												</tbody>
 											</table>
@@ -951,9 +873,20 @@
 	<script src="../assets/plugins/jvectormap-next/jquery-jvectormap-world-mill.js"></script>
 	<script src="../assets/plugins/apexcharts/dist/apexcharts.min.js"></script>
 	<script src="../assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+	<script src="../assets/plugins/chartjs-plugin-labels/chartjs-plugin-labels.js"></script>
 	<script src="../assets/js/demo/common.demo.js"></script>
 	<script src="../assets/js/pages/main/main.js"></script>
 	<!-- ================== END page-js ================== -->
+
+<script type="text/javascript" language="javascript">
+		window.esdata;
+		window.pageno = 1;
+		window.row_index = 0;
+		window.pagesize = 10;
+		$(document).ready(function() {
+			docReady();
+		});
+	</script>
 </body>
 </html>
 
