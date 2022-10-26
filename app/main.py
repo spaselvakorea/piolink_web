@@ -66,11 +66,43 @@ def login():
             return abort(401)
     else:
         return Response('''
-        <form action="" method="post">
-            <p><input type=text name=username>
-            <p><input type=password name=password>
-            <p><input type=submit value=Login>
-        </form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>PIOLINK CTI | Login</title>
+	<link rel="shortcut icon" type="image/x-icon" href="../assets/img/favicon.ico">
+	<link href="../assets/css/vendor.min.css" rel="stylesheet" />
+	<link href="../assets/css/app.min.css" rel="stylesheet" />
+</head>
+<body class='pace-top'>
+	<div id="app" class="app app-full-height app-without-header">
+		<div class="login">
+			<div class="login-content">
+				<form action="" method="POST" name="login_form">
+					<h1 class="text-center">
+						PIOLINK CTI v2.0
+					</h1>
+					<div class="text-white text-center mb-4">
+						Version 2.xxx<br>
+					</div>
+					<div class="mb-3">
+						<label class="form-label">ID <span class="text-danger">*</span></label>
+						<input type="text" name="username" class="form-control form-control-lg bg-white bg-opacity-5" value="" placeholder="" />
+					</div>
+					<div class="mb-3">
+						<div class="d-flex">
+							<label class="form-label">Password <span class="text-danger">*</span></label>
+						</div>
+						<input type="password" name="password" class="form-control form-control-lg bg-white bg-opacity-5" value="" placeholder="" />
+					</div>
+                    <input type="submit" class="btn btn-outline-theme btn-lg d-block w-100 fw-500 mb-3" value="Login">
+				</form>
+			</div>
+		</div>	
+	</div>
+</body>
+</html>
         ''')
 
 
