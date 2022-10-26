@@ -937,17 +937,18 @@ function dashboard_report_urlhunter_info()
             for (var i = 0; i < data.url_list.length; i++) {
                 if(data.url_list[i].is_detected=="Y")
                 {
-                    $("#divUrlHunterDataStatus" + (i+1)).attr("class", "border-danger");
+                    $("#divUrlHunterDataStatus" + (i+1)).attr("class", "border-danger web-image-frame");
                 }
                 else
                 {
-                    $("#divUrlHunterDataStatus" + (i+1)).attr("class", "border-success");
+                    $("#divUrlHunterDataStatus" + (i+1)).attr("class", "border-success web-image-frame");
                 }
+                $("#imgUrlHunter" + (i+1)).attr("src", "https://125.7.199.176/static/screenshots/" + data.url_list[i].screenshot)
 
                 $("#spnUrlHunterDataName" + (i+1)).text(data.url_list[i].site_name);
             }
             for (var i = data.url_list.length; i < 8; i++) {
-                $("#divUrlHunterDataStatus" + (i+1)).attr("class", "border-success");
+                $("#divUrlHunterDataStatus" + (i+1)).attr("class", "border-success web-image-frame");
                 $("#spnUrlHunterDataName" + (i+1)).text('-');
             }
 
