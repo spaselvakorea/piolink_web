@@ -1,6 +1,8 @@
 
 //table tr을 클릭 하면 모달창 show
 $('.pos-content-container').on('click', '.card', function (e) {
+	console.log(e.currentTarget.id);
+	paintModelofTheCard(window.maryadb_site_data[e.currentTarget.id]);
 	$('#modalUri').modal('show');
 })
 
@@ -290,15 +292,15 @@ $("#permitEmailAlert").on('click', function(){
 	}
 })
 
-function addWidget(data)
+function addWidget(data,id)
 {
-	console.log(data);
+	//console.log(data);
 	var val = (data[11] === "Y" || data[12] === "Y" || data[10] < 0.6 || data[8] == 1) ? 'detected' : 'normal';
 	var widg = `
 	<!-- BEGIN web-monitoring card -->
 	<div class="content-web-card col-xxl-3 col-xl-4 pb-4">
 		<!-- BEGIN card -->
-		<div class="card h-100 hand">
+		<div class="card h-100 hand"  id = "`+id+`">
 			<div class="card-body h-100 p-1">
 				<a href="#" class="pos-product">
 					<div class="img" style="background-image: url(`+'https://125.7.199.176/static/screenshots/'+data[4]+`)"></div>
@@ -338,6 +340,10 @@ function addWidget(data)
 	$("#widgetpanel").append(widg);
 }
 
+function paintModelofTheCard(data){
+	console.log(data);
+}
+
 //예외 적용 button click 시 상태 표시 정상 or 예외 event
 $(document).ready(function(){
 	//addWidget();
@@ -345,11 +351,22 @@ $(document).ready(function(){
 		url: 'http://localhost:8086/sites',
 		type: 'GET',
 		success: function (data) {
-		  	window.maryadb_data = data;
-		  	console.log(window.maryadb_data.length);
-		  	for (let i = 0; i < window.maryadb_data.length; i++) {
-				addWidget(window.maryadb_data[i]);
+		  	window.maryadb_site_data = data;
+		  	//console.log(window.maryadb_data.length);
+		  	for (let i = 0; i < window.maryadb_site_data.length; i++) {
+				addWidget(window.maryadb_site_data[i],i);
 			}
+		},
+		error: function (data) {
+		  debugger;
+		  alert("Error");
+		}
+	});
+	$.ajax({
+		url: 'http://localhost:8086/site_contents',
+		type: 'GET',
+		success: function (data) {
+		  	window.maryadb_site_contents_data = data;
 		},
 		error: function (data) {
 		  debugger;
