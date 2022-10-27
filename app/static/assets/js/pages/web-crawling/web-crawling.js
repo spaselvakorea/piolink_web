@@ -733,7 +733,7 @@ function downloadObjectAsJson(exportName){
 function docReady(){
   window.pageno = 1;
   $.ajax({
-    url: 'http://localhost:8085/es',
+    url: 'http://106.254.248.154:40002/es',
     type: 'GET',
     success: function (data) {
       window.esdata = data;

@@ -340,15 +340,87 @@ function addWidget(data,id)
 	$("#widgetpanel").append(widg);
 }
 
+function formatDate(date) {
+	var d = new Date(date),
+	  month = '' + (d.getMonth() + 1),
+	  day = '' + d.getDate(),
+	  year = d.getFullYear();
+  
+	if (month.length < 2) 
+	  month = '0' + month;
+	if (day.length < 2) 
+	  day = '0' + day;
+  
+	return [year, month, day].join('-');
+}
+
+function getJsonRow(data){
+
+	console.log(data);
+
+	const d = new Date(data[20]);
+	
+	var colorcode = "badge bg-danger";
+	if(data[22] == "Y")
+	{
+		colorcode = "badge bg-danger";
+	}
+	else
+	{
+		colorcode = "badge bg-success";
+	}
+
+	let dataJson = { "field001": formatDate(d)+'<br>'+d.toLocaleTimeString(),
+					"field002": data[2],
+					"field003": `<ul>
+							<li>
+								분석 대상(URL) : 
+								<span class="text-success">`+data[19]+`</span>
+							</li>
+							<!-- <li>서버IP : 183.111.131.36:80 (  KR )</li> -->
+						</ul>`,
+					"field004": `평판 분석 :
+							<span class="`+colorcode+` px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center">
+								정상
+							</span>`,
+					"field005": "None",
+					"field006": `<ul>
+							<li>상태 : <span class="badge bg-success">정상</span><br></li>
+							<li class="mt-2">
+								예외 설정 : <button type="button" class="exception-permit-btn btn btn-sm btn-danger fs-12px">예외 적용</button>
+							</li>
+							<li class="mt-2">
+								파일 다운로드 : <button class="btn btn-primary btn-sm fs-12px">다운로드</button>
+							</li>
+						<ul>`
+					};
+return dataJson;
+}
+
 function paintModelofTheCard(data){
 	console.log(data);
+	$.ajax({
+		url: 'http://106.254.248.154:40003/site_contents/'+data[0],
+		type: 'GET',
+		success: function (data_local) {
+			for (let i = 0; i < data_local.length; i++) {
+		  	  //window.maryadb_site_contents_data = data;
+			  var json = getJsonRow(data_local[i]);
+			  $('#table').bootstrapTable('append',json);
+			}
+		},
+		error: function (data_local) {
+		  debugger;
+		  alert("Error");
+		}
+	});
 }
 
 //예외 적용 button click 시 상태 표시 정상 or 예외 event
 $(document).ready(function(){
 	//addWidget();
 	$.ajax({
-		url: 'http://localhost:8086/sites',
+		url: 'http://106.254.248.154:40003/sites',
 		type: 'GET',
 		success: function (data) {
 		  	window.maryadb_site_data = data;
@@ -356,17 +428,6 @@ $(document).ready(function(){
 		  	for (let i = 0; i < window.maryadb_site_data.length; i++) {
 				addWidget(window.maryadb_site_data[i],i);
 			}
-		},
-		error: function (data) {
-		  debugger;
-		  alert("Error");
-		}
-	});
-	$.ajax({
-		url: 'http://localhost:8086/site_contents',
-		type: 'GET',
-		success: function (data) {
-		  	window.maryadb_site_contents_data = data;
 		},
 		error: function (data) {
 		  debugger;
