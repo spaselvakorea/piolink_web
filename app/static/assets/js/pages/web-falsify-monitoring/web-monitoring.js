@@ -426,21 +426,39 @@ function getJsonRow(data) {
 
 function paintModelOfTheCard(data) {
   //console.log(data);
+  $("#site001").attr("src", "https://125.7.199.176/static/screenshots/"+data.screenshot);
+  //$("#site002_3").replaceWith("None");
+  var str1 = (data.similarity < 0.6) ? "bg-danger" : "bg-success";
+  $("#site002_3").replaceWith('<span class="badge '+str1+'">정상</span> ('+data.similarity+')');
+  var str2 = (data.defaced == 1) ? "bg-danger" : "bg-success";
+  $("#site004").replaceWith('<span class="badge '+str2+'">정상</span>');
+  var str3 = (data.reputation_result==='Y') ? "bg-danger" : "bg-success";
+  $("#site005").replaceWith('<span class="badge '+str3+'">악성</span>');
+  $("#site006").replaceWith(data.site_name);
+  $("#site007").replaceWith(data.site_url);
+  const d1 = new Date(data.reg_date);
+  $("#site008").replaceWith(formatDate(d1)+' '+d1.toLocaleTimeString());
+  const d2 = new Date(data.last_chk_date);
+  $("#site009").replaceWith(formatDate(d2)+' '+d2.toLocaleTimeString());
+  //$("#site010").replaceWith("None");
+  //$("#site011").replaceWith("None");
+  console.log(data.ai_score);
+  $("#site012").replaceWith(data.ai_score);
   $.ajax({
     url: "http://106.254.248.154:40003/site_contents/" + data.no,
     type: "GET",
     success: function (data_local) {
-      for (let i = 0; i < data_local.length; i++) {
-        //window.maryadb_site_contents_data = data;
-        var json = getJsonRow(data_local[i]);
-        $("#table").bootstrapTable("append", json);
-        $("#table thead th:eq(0)").css("min-width", "94px");
-        $("#table thead th:eq(1)").css("min-width", "62px");
-        $("#table thead th:eq(2)").css("max-width", "300px");
-        $("#table thead th:eq(3)").css("min-width", "128px");
-        $("#table thead th:eq(4)").css("min-width", "102px");
-        $("#table thead th:eq(5)").css("min-width", "168px");
-      }
+		window.site_contents = data_local;
+		for (let i = 0; i < window.site_contents.length; i++) {
+			var json = getJsonRow(window.site_contents[i]);
+			$("#table").bootstrapTable("append", json);
+			$("#table thead th:eq(0)").css("min-width", "94px");
+			$("#table thead th:eq(1)").css("min-width", "62px");
+			$("#table thead th:eq(2)").css("max-width", "300px");
+			$("#table thead th:eq(3)").css("min-width", "128px");
+			$("#table thead th:eq(4)").css("min-width", "102px");
+			$("#table thead th:eq(5)").css("min-width", "168px");
+		}
     },
     error: function (data_local) {
       debugger;
@@ -449,6 +467,16 @@ function paintModelOfTheCard(data) {
   });
 }
 
+function downloadObjectAsJson(exportName){
+	var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(window.site_contents));
+	var downloadAnchorNode = document.createElement('a');
+	downloadAnchorNode.setAttribute("href",     dataStr);
+	downloadAnchorNode.setAttribute("download", exportName + ".json");
+	document.body.appendChild(downloadAnchorNode); // required for firefox
+	downloadAnchorNode.click();
+	downloadAnchorNode.remove();
+}
+  
 //예외 적용 button click 시 상태 표시 정상 or 예외 event
 $(document).ready(function () {
   //addWidget();
