@@ -1,7 +1,8 @@
 //table tr을 클릭 하면 모달창 show
 $(".pos-content-container").on("click", ".card", function (e) {
-  // console.log(e.currentTarget.id);
-  paintModelofTheCard(window.maryadb_site_data[e.currentTarget.id]);
+  console.log(e.currentTarget.id);
+  console.log(window.maryadb_site_data[e.currentTarget.id])
+  paintModelOfTheCard(window.maryadb_site_data[e.currentTarget.id]);
   $("#modalUri").modal("show");
 });
 
@@ -303,7 +304,7 @@ $("#permitEmailAlert").on("click", function () {
 function addWidget(data, id) {
   //console.log(data);
   var val =
-    data[11] === "Y" || data[12] === "Y" || data[10] < 0.6 || data[8] == 1
+    data.reputation_result === "Y" || data.ai_result === "Y" || data.similarity < 0.6 || data.defaced == 1
       ? "detected"
       : "normal";
   var widg =
@@ -318,12 +319,12 @@ function addWidget(data, id) {
 				<a href="#" class="pos-product">
 					<div class="img" style="background-image: url(` +
     "https://125.7.199.176/static/screenshots/" +
-    data[4] +
+    data.screenshot +
     `)"></div>
 					<div class="info">
 						<div class="d-flex justify-content-between">
 							<div class="title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">` +
-    data[2] +
+    data.site_name+
     `</font></font></div>
 							<div class="dropdown">
 								<button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -339,7 +340,7 @@ function addWidget(data, id) {
 							</div>
 						</div>
 						<div class="desc"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Address: ` +
-    data[3] +
+    data.site_url +
     `</font></font></div>
 						<div class=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Anomaly Detection: ` +
     val +
@@ -375,12 +376,11 @@ function formatDate(date) {
 }
 
 function getJsonRow(data) {
-  // console.log(data);
-
-  const d = new Date(data[20]);
+  console.log(data);
+  const d = new Date(data.check_date);
 
   var colorcode = "badge bg-danger";
-  if (data[22] == "Y") {
+  if (data.reputation_result == "Y") {
     colorcode = "badge bg-danger";
   } else {
     colorcode = "badge bg-success";
@@ -390,7 +390,7 @@ function getJsonRow(data) {
 
   let dataJson = {
     field001: formatDate(d) + "<br>" + d.toLocaleTimeString(),
-    field002: data[2],
+    field002: data.site_name,
     field003:
       `
 							<div style="white-space: pre-line; max-width: 554px">
@@ -398,7 +398,7 @@ function getJsonRow(data) {
 								<span class="text-success" style="
 								word-break: break-all;
 								">` +
-      data[19] +
+      data.pathname +
       `</span>
 							
 							<!-- <li>서버IP : 183.111.131.36:80 (  KR )</li> -->
@@ -424,10 +424,10 @@ function getJsonRow(data) {
   return dataJson;
 }
 
-function paintModelofTheCard(data) {
-  // console.log(data);
+function paintModelOfTheCard(data) {
+  console.log(data);
   $.ajax({
-    url: "http://106.254.248.154:40003/site_contents/" + data[0],
+    url: "http://localhost:5555/site_contents/" + data.no,
     type: "GET",
     success: function (data_local) {
       for (let i = 0; i < data_local.length; i++) {
@@ -453,11 +453,11 @@ function paintModelofTheCard(data) {
 $(document).ready(function () {
   //addWidget();
   $.ajax({
-    url: "http://106.254.248.154:40003/sites",
+    url: "http://localhost:5555/sites",
     type: "GET",
     success: function (data) {
+      //console.log(data);
       window.maryadb_site_data = data;
-      //console.log(window.maryadb_data.length);
       for (let i = 0; i < window.maryadb_site_data.length; i++) {
         addWidget(window.maryadb_site_data[i], i);
       }
