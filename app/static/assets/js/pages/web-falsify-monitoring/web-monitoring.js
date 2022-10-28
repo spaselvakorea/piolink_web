@@ -1,7 +1,7 @@
 //table tr을 클릭 하면 모달창 show
 $(".pos-content-container").on("click", ".card", function (e) {
-  console.log(e.currentTarget.id);
-  console.log(window.maryadb_site_data[e.currentTarget.id])
+  //console.log(e.currentTarget.id);
+  //console.log(window.maryadb_site_data[e.currentTarget.id])
   paintModelOfTheCard(window.maryadb_site_data[e.currentTarget.id]);
   $("#modalUri").modal("show");
 });
@@ -376,7 +376,7 @@ function formatDate(date) {
 }
 
 function getJsonRow(data) {
-  console.log(data);
+  //console.log(data);
   const d = new Date(data.check_date);
 
   var colorcode = "badge bg-danger";
@@ -425,9 +425,9 @@ function getJsonRow(data) {
 }
 
 function paintModelOfTheCard(data) {
-  console.log(data);
+  //console.log(data);
   $.ajax({
-    url: "http://localhost:5555/site_contents/" + data.no,
+    url: "http://106.254.248.154:40003/site_contents/" + data.no,
     type: "GET",
     success: function (data_local) {
       for (let i = 0; i < data_local.length; i++) {
@@ -453,7 +453,7 @@ function paintModelOfTheCard(data) {
 $(document).ready(function () {
   //addWidget();
   $.ajax({
-    url: "http://localhost:5555/sites",
+    url: "http://106.254.248.154:40003/sites",
     type: "GET",
     success: function (data) {
       //console.log(data);
