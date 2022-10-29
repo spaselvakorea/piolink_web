@@ -72,6 +72,10 @@
 //   $("#searchVal").val($(this).val());
 // });
 
+function safeVal(value){
+		return (typeof value  !== "undefined" && value)? value:"NONE";
+}
+
 function addRow(event) {
   let html = `
   <div class="mt-2 addingSearchRow" id="addingSearch">
@@ -493,6 +497,8 @@ function formatDate(date) {
 }
 
 function urlModelFunction(data) {
+  console.log(data._source.ai_url_analysis_result.is_result);
+  console.log(data);
   if(data._source.ai_url_analysis_result.is_result == false)
   {
     $("#url1").replaceWith("NONE");
@@ -525,37 +531,37 @@ function urlModelFunction(data) {
   }
   else
   {
-    $("#url1").replaceWith(data._source.ai_url_analysis_result.detail_info.msg.prediction_score);
-    $("#url11").replaceWith(data._source.ai_url_analysis_result.detail_info.msg.feature.html_lenth);
-    $("#url12").replaceWith(data._source.ai_url_analysis_result.detail_info.msg.feature.windows_popup_cnt);
-    $("#url13").replaceWith(data._source.ai_url_analysis_result.detail_info.msg.feature.redirect_cnt);
-    $("#url14").replaceWith(data._source.ai_url_analysis_result.detail_info.msg.feature.short_and_redirect);
-    $("#url15").replaceWith(data._source.ai_url_analysis_result.detail_info.msg.feature.ssl_remain_day);
-    $("#url16").replaceWith(data._source.ai_url_analysis_result.detail_info.msg.feature.onmouseover_cnt);
-    $("#url17").replaceWith(data._source.ai_url_analysis_result.detail_info.msg.feature.mouseevent_right_cnt);
-    $("#url18").replaceWith(data._source.ai_url_analysis_result.detail_info.msg.feature.alexa_top);
-    $("#url19").replaceWith(data._source.ai_url_analysis_result.detail_info.msg.feature.having_iframe);
-    $("#url20").replaceWith(data._source.ai_url_analysis_result.detail_info.msg.feature.external_link_ratio);
-    $("#url21").replaceWith(data._source.ai_url_analysis_result.detail_info.msg.feature.sharp_tag_link_ratio);
-    $("#url22").replaceWith(data._source.ai_url_analysis_result.detail_info.msg.feature.meta_script_link_tag_ratio);
-    $("#url23").replaceWith(data._source.ai_url_analysis_result.detail_info.msg.feature.form_tag_link);
-    $("#url24").replaceWith(data._source.ai_url_analysis_result.detail_info.msg.feature.email_tag_link);
-    $("#url25").replaceWith(data._source.ai_url_analysis_result.detail_info.msg.feature.external_script_link_ratio);
-    $("#url26").replaceWith(data._source.ai_url_analysis_result.detail_info.msg.feature.open_port);
-    $("#url27").replaceWith(data._source.ai_url_analysis_result.detail_info.msg.feature.having_at_cnt);
-    $("#url28").replaceWith(data._source.ai_url_analysis_result.detail_info.msg.feature.url_length);
-    $("#url29").replaceWith(data._source.ai_url_analysis_result.detail_info.msg.feature.having_ip_address);
-    $("#url30").replaceWith(data._source.data._source.ai_url_analysis_result.detail_info.msg.feature.hyphen_cnt);
-    $("#url31").replaceWith(data._source.ai_url_analysis_result.detail_info.msg.feature.slash_cnt);
-    $("#url32").replaceWith(data._source.ai_url_analysis_result.detail_info.msg.feature.having_https_protocol);
-    $("#url33").replaceWith(data._source.ai_url_analysis_result.detail_info.msg.feature.https_in_domain);
-    $("#url34").replaceWith(data._source.ai_url_analysis_result.detail_info.msg.feature.url_number_cnt_ratio);
-    $("#url35").replaceWith(data._source.ai_url_analysis_result.detail_info.msg.feature.ssl_remain_day);
-    $("#url36").replaceWith(data._source.ai_url_analysis_result.detail_info.msg.feature.whois_domain_expiration);
+    $("#url1").replaceWith(safeVal(data._source.ai_url_analysis_result.detail_info.msg.prediction_score));
+    $("#url11").replaceWith(safeVal(data._source.ai_url_analysis_result.detail_info.msg.feature.html_lenth));
+    $("#url12").replaceWith(safeVal(data._source.ai_url_analysis_result.detail_info.msg.feature.windows_popup_cnt));
+    $("#url13").replaceWith(safeVal(data._source.ai_url_analysis_result.detail_info.msg.feature.redirect_cnt));
+    $("#url14").replaceWith(safeVal(data._source.ai_url_analysis_result.detail_info.msg.feature.short_and_redirect));
+    $("#url15").replaceWith(safeVal(data._source.ai_url_analysis_result.detail_info.msg.feature.ssl_remain_day));
+    $("#url16").replaceWith(safeVal(data._source.ai_url_analysis_result.detail_info.msg.feature.onmouseover_cnt));
+    $("#url17").replaceWith(safeVal(data._source.ai_url_analysis_result.detail_info.msg.feature.mouseevent_right_cnt));
+    $("#url18").replaceWith(safeVal(data._source.ai_url_analysis_result.detail_info.msg.feature.alexa_top));
+    $("#url19").replaceWith(safeVal(data._source.ai_url_analysis_result.detail_info.msg.feature.having_iframe));
+    $("#url20").replaceWith(safeVal(data._source.ai_url_analysis_result.detail_info.msg.feature.external_link_ratio));
+    $("#url21").replaceWith(safeVal(data._source.ai_url_analysis_result.detail_info.msg.feature.sharp_tag_link_ratio));
+    $("#url22").replaceWith(safeVal(data._source.ai_url_analysis_result.detail_info.msg.feature.meta_script_link_tag_ratio));
+    $("#url23").replaceWith(safeVal(data._source.ai_url_analysis_result.detail_info.msg.feature.form_tag_link));
+    $("#url24").replaceWith(safeVal(data._source.ai_url_analysis_result.detail_info.msg.feature.email_tag_link));
+    $("#url25").replaceWith(safeVal(data._source.ai_url_analysis_result.detail_info.msg.feature.external_script_link_ratio));
+    $("#url26").replaceWith(safeVal(data._source.ai_url_analysis_result.detail_info.msg.feature.open_port));
+    $("#url27").replaceWith(safeVal(data._source.ai_url_analysis_result.detail_info.msg.feature.having_at_cnt));
+    $("#url28").replaceWith(safeVal(data._source.ai_url_analysis_result.detail_info.msg.feature.url_length));
+    $("#url29").replaceWith(safeVal(data._source.ai_url_analysis_result.detail_info.msg.feature.having_ip_address));
+    $("#url30").replaceWith(safeVal(data._source.ai_url_analysis_result.detail_info.msg.feature.hyphen_cnt));
+    $("#url31").replaceWith(safeVal(data._source.ai_url_analysis_result.detail_info.msg.feature.slash_cnt));
+    $("#url32").replaceWith(safeVal(data._source.ai_url_analysis_result.detail_info.msg.feature.having_https_protocol));
+    $("#url33").replaceWith(safeVal(data._source.ai_url_analysis_result.detail_info.msg.feature.https_in_domain));
+    $("#url34").replaceWith(safeVal(data._source.ai_url_analysis_result.detail_info.msg.feature.url_number_cnt_ratio));
+    $("#url35").replaceWith(safeVal(data._source.ai_url_analysis_result.detail_info.msg.feature.ssl_remain_day));
+    $("#url36").replaceWith(safeVal(data._source.ai_url_analysis_result.detail_info.msg.feature.whois_domain_expiration));
   }
   const d = new Date(data._source.collect_info.collect_date);
   $("#url2").replaceWith(formatDate(d)+' '+d.toLocaleTimeString());
-  $("#url3").replaceWith(data._source.collect_info.collect_server_ip);
+  $("#url3").replaceWith(safeVal(data._source.collect_info.collect_server_ip));
   var str4 = "";
   if(data._source.url_reputation_result.detail_info.is_malicious_url)
   {
@@ -566,12 +572,12 @@ function urlModelFunction(data) {
     str4 = "정상(normal)";
   }
   $("#url4").replaceWith(str4);
-  $("#url5").replaceWith(data._source.collect_info.country);
-  $("#url6").replaceWith(data._source.collect_info.url);
+  $("#url5").replaceWith(safeVal(data._source.collect_info.country));
+  $("#url6").replaceWith(safeVal(data._source.collect_info.url));
   const d2 = new Date(data._source.reg_date);
   $("#url7").replaceWith(formatDate(d2)+' '+d2.toLocaleTimeString());
   $("#url8").replaceWith("WIP");
-  $("#url9").replaceWith(data._source.collect_info.ip);
+  $("#url9").replaceWith(safeVal(data._source.collect_info.ip));
   $("#url10").replaceWith("WIP");
   
 }
@@ -607,32 +613,32 @@ function urlROW_BS(data)
   }
 
   function fileModelFunction(data) {
-  $("#file1").replaceWith(data._source.collect_info.file_name);
-  $("#file2").replaceWith(data._source.file_info.length);
-  $("#file3").replaceWith(data._source.type);
+  $("#file1").replaceWith(safeVal(data._source.collect_info.file_name));
+  $("#file2").replaceWith(safeVal(data._source.file_info.length));
+  $("#file3").replaceWith(safeVal(data._source.type));
   $("#file4").replaceWith("WIP");
-  $("#file5").replaceWith(data._source.file_info.length);
-  $("#file6").replaceWith(data._source.file_info.sha1);
-  $("#file7").replaceWith(data._source.file_info.sha256);
-  $("#file8").replaceWith(data._source.file_info.sha512);
-  $("#file9").replaceWith(data._source.file_info.magic_mime + " " + data._source.file_info.guess_extension);
-  $("#file10").replaceWith(data._source.file_info.pe_info.digital_sign.subject);
-  $("#file11").replaceWith(data._source.file_info.pe_info.digital_sign.algorithm);
-  $("#file12").replaceWith(data._source.file_info.pe_info.digital_sign.hash_algorithm);
-  $("#file13").replaceWith(data._source.file_info.pe_info.digital_sign.valid_from);
-  $("#file14").replaceWith(data._source.file_info.pe_info.digital_sign.valid_to);
-  $("#file15").replaceWith(data._source.file_info.pe_info.digital_sign.issuer);
-  $("#file16").replaceWith(data._source.file_info.pe_info.digital_sign.serial_number);
-  $("#file17").replaceWith(data._source.zzero_analysis_result.detail_info.vaccine_detect_result);
-  $("#file18").replaceWith(data._source.zzero_analysis_result.detail_info.vaccine_detail_result);
+  $("#file5").replaceWith(safeVal(data._source.file_info.length));
+  $("#file6").replaceWith(safeVal(data._source.file_info.sha1));
+  $("#file7").replaceWith(safeVal(data._source.file_info.sha256));
+  $("#file8").replaceWith(safeVal(data._source.file_info.sha512));
+  $("#file9").replaceWith(safeVal(data._source.file_info.magic_mime) + " " + safeVal(data._source.file_info.guess_extension));
+  $("#file10").replaceWith(safeVal(data._source.file_info.pe_info.digital_sign.subject));
+  $("#file11").replaceWith(safeVal(data._source.file_info.pe_info.digital_sign.algorithm));
+  $("#file12").replaceWith(safeVal(data._source.file_info.pe_info.digital_sign.hash_algorithm));
+  $("#file13").replaceWith(safeVal(data._source.file_info.pe_info.digital_sign.valid_from));
+  $("#file14").replaceWith(safeVal(data._source.file_info.pe_info.digital_sign.valid_to));
+  $("#file15").replaceWith(safeVal(data._source.file_info.pe_info.digital_sign.issuer));
+  $("#file16").replaceWith(safeVal(data._source.file_info.pe_info.digital_sign.serial_number));
+  $("#file17").replaceWith(safeVal(data._source.zzero_analysis_result.detail_info.vaccine_detect_result));
+  $("#file18").replaceWith(safeVal(data._source.zzero_analysis_result.detail_info.vaccine_detail_result));
   $("#file19").val(data._source.zzero_analysis_result.detail_info.static_result);
-  $("#file20").replaceWith(data._source.zzero_analysis_result.detail_info.detail_analysis_info.static_yara_rule);
+  $("#file20").replaceWith(safeVal(data._source.zzero_analysis_result.detail_info.detail_analysis_info.static_yara_rule));
   $("#file21").val(data._source.zzero_analysis_result.detail_info.dynamic_result);
-  $("#file22").replaceWith(data._source.zzero_analysis_result.detail_info.detail_analysis_info.dynamic_analysis);
+  $("#file22").replaceWith(safeVal(data._source.zzero_analysis_result.detail_info.detail_analysis_info.dynamic_analysis));
 
-  $("#file_tab1_1_2").replaceWith(data._source.ai_file_analysis_result.detail_info.data.detection_percentage.Malware+'% <span class="text-danger">'+data._source.ai_file_analysis_result.detail_info.data.detection+'</span>') ;
-  $("#file_tab1_3").replaceWith(data._source.ai_file_analysis_result.execute_time);
-  $("#file_tab1_4_5").replaceWith(data._source.ai_file_analysis_result.detail_info.data.malware);
+  $("#file_tab1_1_2").replaceWith(safeVal(data._source.ai_file_analysis_result.detail_info.data.detection_percentage.Malware)+'% <span class="text-danger">'+safeVal(data._source.ai_file_analysis_result.detail_info.data.detection)+'</span>') ;
+  $("#file_tab1_3").replaceWith(safeVal(data._source.ai_file_analysis_result.execute_time));
+  $("#file_tab1_4_5").replaceWith(safeVal(data._source.ai_file_analysis_result.detail_info.data.malware));
 
   var bac = data._source.ai_file_analysis_result.detail_info.data.malware_type_percentage.Backdoor;
   var dow = data._source.ai_file_analysis_result.detail_info.data.malware_type_percentage.Downloader;
