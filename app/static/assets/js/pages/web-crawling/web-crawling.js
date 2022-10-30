@@ -774,6 +774,36 @@ function urlROW_BS(data)
   //console.log(obj1)
   $("#file_tab2_002").replaceWith(safeVal(obj1));
   
+  
+  //Tab3
+  $("#file_tab2_001").val(safeVal(data._source.zzero_analysis_result.detail_info.dynamic_result));
+  let obj2 = "";
+  let jsonTab3 = data._source.zzero_analysis_result.detail_info.detail_analysis_info.dynamic_analysis;
+  var table1_tab3 = $('#file_tab3_table1').DataTable();
+  table1_tab3.clear();
+  for(let i = 0; i < jsonTab3.length; i++) {
+	 if(i>0) obj2 += ", ";
+    obj2 += jsonTab3[i].yararule_file;
+	console.log(jsonTab3[i]);	
+	table1_tab3.row.add($(`<tr>
+								<td>`+jsonTab3[i].yararule_file+`</td>
+								<td>`+jsonTab3[i].tid+`</td>
+								<td>
+									<input 
+										id="" 
+										name="input-1-ltr-star-xs" 
+										class="kv-ltr-theme-fas-star rating-loading" 
+										value="`+jsonTab3[i].security_level+`" 
+										dir="ltr" 
+										data-size="xs"
+									/>
+								</td>
+								<td>`+jsonTab3[i].tdescription+`</td>
+							</tr>`)).draw();	
+  }
+  $("#file_tab2_002").replaceWith(safeVal(obj2));
+  
+  
   // Special controle to redraw proper
   $(".kv-ltr-theme-fas-star").rating({
       displayOnly: true,
