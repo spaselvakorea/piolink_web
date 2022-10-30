@@ -622,13 +622,26 @@ function urlROW_BS(data)
   $("#file7").replaceWith(safeVal(data._source.file_info.sha256));
   $("#file8").replaceWith(safeVal(data._source.file_info.sha512));
   $("#file9").replaceWith(safeVal(data._source.file_info.magic_mime) + " " + safeVal(data._source.file_info.guess_extension));
-  $("#file10").replaceWith(safeVal(data._source.file_info.pe_info.digital_sign.subject));
-  $("#file11").replaceWith(safeVal(data._source.file_info.pe_info.digital_sign.algorithm));
-  $("#file12").replaceWith(safeVal(data._source.file_info.pe_info.digital_sign.hash_algorithm));
-  $("#file13").replaceWith(safeVal(data._source.file_info.pe_info.digital_sign.valid_from));
-  $("#file14").replaceWith(safeVal(data._source.file_info.pe_info.digital_sign.valid_to));
-  $("#file15").replaceWith(safeVal(data._source.file_info.pe_info.digital_sign.issuer));
-  $("#file16").replaceWith(safeVal(data._source.file_info.pe_info.digital_sign.serial_number));
+  if(data._source.file_info.is_pe == true)
+  {
+	  $("#file10").replaceWith(safeVal(data._source.file_info.pe_info.digital_sign.subject));
+	  $("#file11").replaceWith(safeVal(data._source.file_info.pe_info.digital_sign.algorithm));
+	  $("#file12").replaceWith(safeVal(data._source.file_info.pe_info.digital_sign.hash_algorithm));
+	  $("#file13").replaceWith(safeVal(data._source.file_info.pe_info.digital_sign.valid_from));
+	  $("#file14").replaceWith(safeVal(data._source.file_info.pe_info.digital_sign.valid_to));
+	  $("#file15").replaceWith(safeVal(data._source.file_info.pe_info.digital_sign.issuer));
+	  $("#file16").replaceWith(safeVal(data._source.file_info.pe_info.digital_sign.serial_number));
+  }
+  else
+  {
+	  $("#file10").replaceWith("NONE");
+	  $("#file11").replaceWith("NONE");
+	  $("#file12").replaceWith("NONE");
+	  $("#file13").replaceWith("NONE");
+	  $("#file14").replaceWith("NONE");
+	  $("#file15").replaceWith("NONE");
+	  $("#file16").replaceWith("NONE");
+  }
   $("#file17").replaceWith(safeVal(data._source.zzero_analysis_result.detail_info.vaccine_detect_result));
   $("#file18").replaceWith(safeVal(data._source.zzero_analysis_result.detail_info.vaccine_detail_result));
   $("#file19").val(data._source.zzero_analysis_result.detail_info.static_result);
@@ -748,8 +761,10 @@ function urlROW_BS(data)
 									<td>`+json5[i].offset+`</td>
 								</tr>`)).draw();
 		}
-		var table5_tab2 = $('#file_tab2_table6').DataTable();
-		table5_tab2.row.add($(`<tr>
+    
+    var table6_tab2 = $('#file_tab2_table6').DataTable();
+    table6_tab2.clear();
+		table6_tab2.row.add($(`<tr>
 									<td>`+data._source.file_info.file_mtime+`</td>
 									<td>`+data._source.file_info.file_ctime+`</td>
 									<td>`+data._source.file_info.file_atime+`</td>
@@ -781,13 +796,16 @@ function fileROW_BS(data)
   const d1 = new Date(data._source.zzero_analysis_result.execute_time);
   const d2 = new Date(data._source.ai_file_analysis_result.execute_time);
   var colorcode = "badge bg-danger";
-  if(safeVal(data._source.zzero_analysis_result.detail_info.total_result) == false)
+  if(data._source.zzero_analysis_result.is_result)
   {
-    colorcode = "badge bg-danger";
-  }
-  else
-  {
-    colorcode = "badge bg-success";
+    if(safeVal(data._source.zzero_analysis_result.detail_info.total_result) == false)
+    {
+      colorcode = "badge bg-danger";
+    }
+    else
+    {
+      colorcode = "badge bg-success";
+    }
   }
   let dataJson = { "field001": formatDate(d)+'<br>'+d.toLocaleTimeString(),
         "field002": 'OSINT1<br>'+data._source.collect_info.collect_server_ip,
