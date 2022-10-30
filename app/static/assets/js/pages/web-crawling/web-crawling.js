@@ -667,6 +667,49 @@ function urlROW_BS(data)
   $("#art001").replaceWith(html);
   
   //$("#file_tab1_7").replaceWith("");
+  //console.log(safeVal(data._source.zzero_analysis_result.detail_info.static_result));
+  $("#file_tab2_001").val(safeVal(data._source.zzero_analysis_result.detail_info.static_result));
+  let obj1 = "";
+  let json1 = data._source.zzero_analysis_result.detail_info.detail_analysis_info.static_yara_rule;
+  console.log(json1);
+  var table_tab2 = $('#file_tab2_table').DataTable();
+  table_tab2.clear();
+  for(let i = 0; i < json1.length; i++) {
+	if(i>0) obj1 += ", ";
+    obj1 += json1[i].name;
+	table_tab2.row.add($(`<tr>
+						<td class="data">`+json1[i].name+`</td>
+						<td class="data">`+json1[i].tid+`</td>
+						<td class="data">
+							<input 
+							id="input-1-ltr-star-xs" 
+							name="input-1-ltr-star-xs" 
+							class="kv-ltr-theme-fas-star rating-loading" 
+							value="`+json1[i].level+`" 
+							dir="ltr" 
+							data-size="xs"
+						/>
+						</td>
+						<td>`+json1[i].desc+`</td>
+					</tr>`)).draw();
+  }
+  //console.log(obj1)
+  $("#file_tab2_002").replaceWith(safeVal(obj1));
+  
+  // Special controle to redraw proper
+  $(".kv-ltr-theme-fas-star").rating({
+      displayOnly: true,
+      hoverOnClear: false,
+      theme: "krajee-fas",
+      defaultCaption: "{rating}",
+      starCaptions: function(rating) {
+        // return rating == 1 ? 'One heart' : rating + ' hearts';
+      },
+      filledStar: '<i class="fas fa-circle"></i>',
+      emptyStar: '<i class="far fa-circle"></i>',
+    });
+  
+  
 }
 
 function fileROW_BS(data)
