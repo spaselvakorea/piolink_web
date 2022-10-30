@@ -585,7 +585,7 @@ function urlModelFunction(data) {
 function urlROW_BS(data)
 {
   var colorcode = "badge bg-danger";
-  if(data._source.url_reputation_result.detail_info.is_malicious_url == false)
+  if( typeof data._source.url_reputation_result.detail_info.is_malicious_url  !== "undefined" || data._source.url_reputation_result.detail_info.is_malicious_url == false)
   {
     colorcode = "badge bg-danger";
   }
@@ -594,7 +594,7 @@ function urlROW_BS(data)
     colorcode = "badge bg-success";
   }
   var str = "NONE";
-  if(data._source.ai_url_analysis_result.is_result == false)
+  if( typeof data._source.ai_url_analysis_result.is_result  !== "undefined" || data._source.ai_url_analysis_result.is_result == false)
   {
     str = "NONE";
   }
@@ -671,13 +671,12 @@ function urlROW_BS(data)
   $("#file_tab2_001").val(safeVal(data._source.zzero_analysis_result.detail_info.static_result));
   let obj1 = "";
   let json1 = data._source.zzero_analysis_result.detail_info.detail_analysis_info.static_yara_rule;
-  console.log(json1);
-  var table_tab2 = $('#file_tab2_table').DataTable();
-  table_tab2.clear();
+  var table1_tab2 = $('#file_tab2_table').DataTable();
+  table1_tab2.clear();
   for(let i = 0; i < json1.length; i++) {
 	if(i>0) obj1 += ", ";
     obj1 += json1[i].name;
-	table_tab2.row.add($(`<tr>
+	table1_tab2.row.add($(`<tr>
 						<td class="data">`+json1[i].name+`</td>
 						<td class="data">`+json1[i].tid+`</td>
 						<td class="data">
@@ -692,7 +691,65 @@ function urlROW_BS(data)
 						</td>
 						<td>`+json1[i].desc+`</td>
 					</tr>`)).draw();
+					
   }
+  
+  if(data._source.file_info.is_pe == true)
+  {
+	  let json2 = data._source.file_info.pe_info.section;
+	  console.log("json2"+json2);
+	  var table2_tab2 = $('#file_tab2_table2').DataTable();
+	  table2_tab2.clear();
+	  for(let i = 0; i < json2.length; i++) {
+		table2_tab2.row.add($(`<tr>
+									<td>`+json2[i].name+`</td>
+									<td>`+json2[i].virtual_address+`</td>
+									<td>`+json2[i].size_of_raw_data+`</td>
+									<td>`+json2[i].pointer_to_raw_data+`</td>
+									<td>`+json2[i].entropy+`</td>
+								</tr>`)).draw();
+	  }
+	  
+	  let json3 = data._source.file_info.pe_info.resource;
+	  console.log("json3"+json3);
+	  var table3_tab2 = $('#file_tab2_table3').DataTable();
+	  table3_tab2.clear();
+	  for(let i = 0; i < json3.length; i++) {
+		table3_tab2.row.add($(`<tr>
+									<td class="data Ar">`+json3[i].name+`</td>
+									<td class="data Ar">`+json3[i].offset+`</td>
+									<td class="data Ar">`+json3[i].size+`</td>
+									<td class="data Ar">`+json3[i].language+`</td>
+									<td class="data Ar">`+json3[i].sub_language+`</td>
+								</tr>`)).draw();
+	  }
+
+	  let json4 = data._source.file_info.pe_info.import;
+	  console.log("json4"+json4);
+	  var table4_tab2 = $('#file_tab2_table4').DataTable();
+	  table4_tab2.clear();
+	  for(let i = 0; i < json4.length; i++) {
+		table4_tab2.row.add($(`<tr>
+									<td>
+										<span style="font-weight: bold;">ADVAPI32.dll </span>- RegOpenKeyExW -0x28C 
+									</td>
+								</tr>`)).draw();
+	  }
+
+	  let json5 = data._source.file_info.pe_info.export;
+	  console.log("json5"+json5);
+	  var table5_tab2 = $('#file_tab2_table5').DataTable();
+	  table5_tab2.clear();
+	  for(let i = 0; i < json5.length; i++) {
+		table5_tab2.row.add($(`<tr>
+									<td>def</td>
+									<td>def</td>
+									<td>def</td>
+								</tr>`)).draw();
+	  }
+  
+  }
+
   //console.log(obj1)
   $("#file_tab2_002").replaceWith(safeVal(obj1));
   
@@ -718,7 +775,7 @@ function fileROW_BS(data)
   const d1 = new Date(data._source.zzero_analysis_result.execute_time);
   const d2 = new Date(data._source.ai_file_analysis_result.execute_time);
   var colorcode = "badge bg-danger";
-  if(data._source.zzero_analysis_result.detail_info.total_result == false)
+  if(safeVal(data._source.zzero_analysis_result.detail_info.total_result) == false)
   {
     colorcode = "badge bg-danger";
   }
