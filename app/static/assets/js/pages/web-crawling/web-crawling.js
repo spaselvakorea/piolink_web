@@ -694,13 +694,13 @@ function urlROW_BS(data)
 					
   }
   
-  if(data._source.file_info.is_pe == true)
-  {
-	  let json2 = data._source.file_info.pe_info.section;
-	  console.log("json2"+json2);
-	  var table2_tab2 = $('#file_tab2_table2').DataTable();
-	  table2_tab2.clear();
-	  for(let i = 0; i < json2.length; i++) {
+	if(data._source.file_info.is_pe == true)
+	{
+		let json2 = data._source.file_info.pe_info.section;
+		//console.log("json2"+json2);
+		var table2_tab2 = $('#file_tab2_table2').DataTable();
+		table2_tab2.clear();
+		for(let i = 0; i < json2.length; i++) {
 		table2_tab2.row.add($(`<tr>
 									<td>`+json2[i].name+`</td>
 									<td>`+json2[i].virtual_address+`</td>
@@ -708,13 +708,13 @@ function urlROW_BS(data)
 									<td>`+json2[i].pointer_to_raw_data+`</td>
 									<td>`+json2[i].entropy+`</td>
 								</tr>`)).draw();
-	  }
-	  
-	  let json3 = data._source.file_info.pe_info.resource;
-	  console.log("json3"+json3);
-	  var table3_tab2 = $('#file_tab2_table3').DataTable();
-	  table3_tab2.clear();
-	  for(let i = 0; i < json3.length; i++) {
+		}
+
+		let json3 = data._source.file_info.pe_info.resource;
+		//console.log("json3"+json3);
+		var table3_tab2 = $('#file_tab2_table3').DataTable();
+		table3_tab2.clear();
+		for(let i = 0; i < json3.length; i++) {
 		table3_tab2.row.add($(`<tr>
 									<td class="data Ar">`+json3[i].name+`</td>
 									<td class="data Ar">`+json3[i].offset+`</td>
@@ -722,33 +722,39 @@ function urlROW_BS(data)
 									<td class="data Ar">`+json3[i].language+`</td>
 									<td class="data Ar">`+json3[i].sub_language+`</td>
 								</tr>`)).draw();
-	  }
+		}
 
-	  let json4 = data._source.file_info.pe_info.import;
-	  console.log("json4"+json4);
-	  var table4_tab2 = $('#file_tab2_table4').DataTable();
-	  table4_tab2.clear();
-	  for(let i = 0; i < json4.length; i++) {
+		let json4 = data._source.file_info.pe_info.import;
+		//console.log("json4"+json4);
+		var table4_tab2 = $('#file_tab2_table4').DataTable();
+		table4_tab2.clear();
+		for(let i = 0; i < json4.length; i++) {
 		table4_tab2.row.add($(`<tr>
 									<td>
-										<span style="font-weight: bold;">ADVAPI32.dll </span>- RegOpenKeyExW -0x28C 
+										<span style="font-weight: bold;">`+json4[i].library+`</span>- RegOpenKeyExW -0x28C 
 									</td>
+									<td>`+json4[i].function+`</td>
+									<td>`+json4[i].offset+`</td>
 								</tr>`)).draw();
-	  }
+		}
 
-	  let json5 = data._source.file_info.pe_info.export;
-	  console.log("json5"+json5);
-	  var table5_tab2 = $('#file_tab2_table5').DataTable();
-	  table5_tab2.clear();
-	  for(let i = 0; i < json5.length; i++) {
+		let json5 = data._source.file_info.pe_info.export;
+		//console.log("json5"+json5);
+		var table5_tab2 = $('#file_tab2_table5').DataTable();
+		table5_tab2.clear();
+		for(let i = 0; i < json5.length; i++) {
 		table5_tab2.row.add($(`<tr>
-									<td>def</td>
-									<td>def</td>
-									<td>def</td>
+									<td>`+json5[i].function+`</td>
+									<td>`+json5[i].offset+`</td>
 								</tr>`)).draw();
-	  }
-  
-  }
+		}
+		var table5_tab2 = $('#file_tab2_table6').DataTable();
+		table5_tab2.row.add($(`<tr>
+									<td>`+data._source.file_info.file_mtime+`</td>
+									<td>`+data._source.file_info.file_ctime+`</td>
+									<td>`+data._source.file_info.file_atime+`</td>
+								</tr>`)).draw();
+	}
 
   //console.log(obj1)
   $("#file_tab2_002").replaceWith(safeVal(obj1));
