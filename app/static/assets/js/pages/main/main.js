@@ -624,7 +624,7 @@ function docReady(){
 function dashboard_report_count()
 {
     $.ajax({
-        url: 'http://106.254.248.154:40002/monitoring/count_info',
+        url: 'http://125.7.199.174:8090/monitoring/count_info',
         type: 'GET',
         success: function (data) {
 
@@ -652,7 +652,7 @@ function dashboard_report_count()
 function dashboard_system_info()
 {
     $.ajax({
-        url: 'http://106.254.248.154:40002/monitoring/system_info',
+        url: 'http://125.7.199.174:8090/monitoring/system_info',
         type: 'GET',
         success: function (data) {
             m_cpu_model = data.system_resource_monitoring_data.cpu_model_name;
@@ -758,7 +758,7 @@ function dashboard_system_info()
 function dashboard_report_ai_analysis_info()
 {
     $.ajax({
-        url: 'http://106.254.248.154:40002/monitoring/ai_analysis_info',
+        url: 'http://125.7.199.174:8090/monitoring/ai_analysis_info',
         type: 'GET',
         success: function (data) {
 
@@ -851,7 +851,7 @@ function dashboard_report_ai_analysis_info()
 function dashboard_report_daily_analysis_info()
 {
     $.ajax({
-        url: 'http://106.254.248.154:40002/monitoring/daily_analysis_info',
+        url: 'http://125.7.199.174:8090/monitoring/daily_analysis_info',
         type: 'GET',
         success: function (data) {
 
@@ -930,7 +930,7 @@ function dashboard_report_daily_analysis_info()
 function dashboard_report_urlhunter_info()
 {
     $.ajax({
-        url: 'http://106.254.248.154:40002/monitoring/urlhunter_info',
+        url: 'http://125.7.199.174:8090/monitoring/urlhunter_info',
         type: 'GET',
         success: function (data) {
 
@@ -953,7 +953,7 @@ function dashboard_report_urlhunter_info()
             }
 
             $('#spnUrlHunterDetectCount').text(data.total_detect_count);
-            $('#spnUrlHunterNormalCount').text(data.total_normal_count);
+            $('#spnUrlHunterNormalCount').text(data.total_monitor_count);
 
 
         },

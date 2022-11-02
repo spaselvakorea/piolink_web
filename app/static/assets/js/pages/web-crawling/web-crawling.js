@@ -707,12 +707,21 @@ function urlROW_BS(data)
 					
   }
   
+	var table2_tab2 = $('#file_tab2_table2').DataTable();
+	table2_tab2.clear();
+	var table3_tab2 = $('#file_tab2_table3').DataTable();
+	table3_tab2.clear();
+	var table4_tab2 = $('#file_tab2_table4').DataTable();
+	table4_tab2.clear();
+	var table5_tab2 = $('#file_tab2_table5').DataTable();
+	table5_tab2.clear();
+	var table6_tab2 = $('#file_tab2_table6').DataTable();
+    table6_tab2.clear();
+					
 	if(data._source.file_info.is_pe == true)
 	{
 		let json2 = data._source.file_info.pe_info.section;
 		//console.log("json2"+json2);
-		var table2_tab2 = $('#file_tab2_table2').DataTable();
-		table2_tab2.clear();
 		for(let i = 0; i < json2.length; i++) {
 		table2_tab2.row.add($(`<tr>
 									<td>`+json2[i].name+`</td>
@@ -725,8 +734,7 @@ function urlROW_BS(data)
 
 		let json3 = data._source.file_info.pe_info.resource;
 		//console.log("json3"+json3);
-		var table3_tab2 = $('#file_tab2_table3').DataTable();
-		table3_tab2.clear();
+		
 		for(let i = 0; i < json3.length; i++) {
 		table3_tab2.row.add($(`<tr>
 									<td class="data Ar">`+json3[i].name+`</td>
@@ -739,8 +747,6 @@ function urlROW_BS(data)
 
 		let json4 = data._source.file_info.pe_info.import;
 		//console.log("json4"+json4);
-		var table4_tab2 = $('#file_tab2_table4').DataTable();
-		table4_tab2.clear();
 		for(let i = 0; i < json4.length; i++) {
 		table4_tab2.row.add($(`<tr>
 									<td>
@@ -753,8 +759,6 @@ function urlROW_BS(data)
 
 		let json5 = data._source.file_info.pe_info.export;
 		//console.log("json5"+json5);
-		var table5_tab2 = $('#file_tab2_table5').DataTable();
-		table5_tab2.clear();
 		for(let i = 0; i < json5.length; i++) {
 		table5_tab2.row.add($(`<tr>
 									<td>`+json5[i].function+`</td>
@@ -762,9 +766,7 @@ function urlROW_BS(data)
 								</tr>`)).draw();
 		}
     
-    var table6_tab2 = $('#file_tab2_table6').DataTable();
-    table6_tab2.clear();
-		table6_tab2.row.add($(`<tr>
+    	table6_tab2.row.add($(`<tr>
 									<td>`+data._source.file_info.file_mtime+`</td>
 									<td>`+data._source.file_info.file_ctime+`</td>
 									<td>`+data._source.file_info.file_atime+`</td>
@@ -893,7 +895,7 @@ function downloadObjectAsJson(exportName){
 function docReady(){
   window.pageno = 1;
   $.ajax({
-    url: 'http://106.254.248.154:40002/es',
+    url: 'http://125.7.199.174:8090/es',
     type: 'GET',
     success: function (data) {
       window.esdata = data;

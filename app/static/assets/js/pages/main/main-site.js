@@ -123,3 +123,45 @@ $(document).ready(function() {
     handleRenderMap();
   });
 });
+
+function docReady(){
+    dashboard_report_urlhunter_info();
+}
+
+function dashboard_report_urlhunter_info()
+{
+    $.ajax({
+        url: 'http://125.7.199.174:8090/monitoring/urlhunter_info_user',
+        type: 'GET',
+        success: function (data) {
+
+            for (var i = 0; i < data.url_list.length; i++) {
+                if(data.url_list[i].is_detected=="Y")
+                {
+                    $("#divUrlHunterDataStatus" + (i+1)).attr("class", "border-danger web-image-frame");
+                }
+                else
+                {
+                    $("#divUrlHunterDataStatus" + (i+1)).attr("class", "border-success web-image-frame");
+                }
+                $("#imgUrlHunter" + (i+1)).attr("src", "https://125.7.199.176/static/screenshots/" + data.url_list[i].screenshot)
+
+                $("#spnUrlHunterDataName" + (i+1)).text(data.url_list[i].site_name);
+            }
+            for (var i = data.url_list.length; i < 8; i++) {
+                $("#divUrlHunterDataStatus" + (i+1)).attr("class", "border-success web-image-frame");
+                $("#spnUrlHunterDataName" + (i+1)).text('-');
+            }
+
+            $('#spnUrlHunterDetectCount').text(data.total_detect_count);
+            $('#spnUrlHunterNormalCount').text(data.total_monitor_count);
+
+
+        },
+        error: function (data) {
+         cRealTimeID = window.setTimeout("dashboard_report_urlhunter_info()", 10000);
+        }
+    });
+
+    cRealTimeID = window.setTimeout("dashboard_report_urlhunter_info()", 60000 * 5);
+}

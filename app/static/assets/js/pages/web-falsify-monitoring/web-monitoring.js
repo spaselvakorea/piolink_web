@@ -445,7 +445,7 @@ function paintModelOfTheCard(data) {
   console.log(data.ai_score);
   $("#site012").replaceWith(data.ai_score);
   $.ajax({
-    url: "http://106.254.248.154:40003/site_contents/" + data.no,
+    url: "http://125.7.199.174:8090/site_contents/" + data.no,
     type: "GET",
     success: function (data_local) {
 		window.site_contents = data_local;
@@ -481,7 +481,7 @@ function downloadObjectAsJson(exportName){
 $(document).ready(function () {
   //addWidget();
   $.ajax({
-    url: "http://106.254.248.154:40003/sites",
+    url: "http://125.7.199.174:8090/sites",
     type: "GET",
     success: function (data) {
       //console.log(data);
