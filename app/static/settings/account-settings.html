@@ -324,18 +324,18 @@
 							data-classes="">
 							<thead>
 								<tr>
-									<th>사이트</th>
-									<th>IP:Port</th>
-									<th>ID</th>
-									<th>Password</th>
-									<th>권한</th>
-									<th>설명</th>
-									<th>문화권</th>
-									<th>관리</th>
+									<th data-field="Afield001">사이트</th>
+									<th data-field="Afield002">IP:Port</th>
+									<th data-field="Afield003">ID</th>
+									<th data-field="Afield004">Password</th>
+									<th data-field="Afield005">권한</th>
+									<th data-field="Afield006">설명</th>
+									<th data-field="Afield007">문화권</th>
+									<th data-field="Afield008">관리</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
+								<!--<tr>
 									<td>test</td>
 									<td>def</td>
 									<td>def</td>
@@ -401,7 +401,7 @@
 											</ul>
 										</div>
 									</td>
-								</tr>
+								</tr>-->
 							</tbody>
 						</table>
 						<!-- END table -->
@@ -779,5 +779,63 @@
 	<script src="../assets/plugins/bootstrap-table/dist/extensions/auto-refresh/bootstrap-table-auto-refresh.js"></script>
 	<script src="../assets/js/demo/common.demo.js"></script>
 	<!-- ================== END page-js ================== -->
+	
+	<script type="text/javascript" language="javascript"> 
+		window.admindata;
+		function downloadObjectAsJson(exportName){
+			var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(window.admindata));
+			var downloadAnchorNode = document.createElement('a');
+			downloadAnchorNode.setAttribute("href",     dataStr);
+			downloadAnchorNode.setAttribute("download", exportName + ".json");
+			document.body.appendChild(downloadAnchorNode); // required for firefox
+			downloadAnchorNode.click();
+			downloadAnchorNode.remove();
+		}
+		
+		function adminROW_BS(data){
+			let json = {"Afield001": data.site_name,
+			"Afield002": "def",
+			"Afield003": data.id,
+			"Afield004": data.password,
+			"Afield001": data.authority,
+			"Afield001": (country_code=="ko-kr")? "Korean":"English",
+			"Afield001": `<div class="dropdown">
+								<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+									<i class="bi bi-gear-fill"></i>
+								</button>
+								<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+									<li class="d-flex flex-column px-2">
+										<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalAdminModify">수정</button>
+						
+										<button type="button" class="btn btn-danger mt-2 message-delete">삭제</button>
+									</li>
+								</ul>
+							</div>`
+			};
+			return json;
+		}
+		
+		$(document).ready(function() {  
+			$.ajax({
+				url: "http://106.254.248.154:40003/admin",
+				type: "GET",
+				success: function (data) {
+				  //console.log(data);
+				  window.admindata = data;
+				  for (let i = 0; i < window.admindata.length; i++) {
+					addWidget(window.admindata[i], i);
+					var json = adminROW_BS(window.esdata[i]);
+					$('#table').bootstrapTable('append',json);
+				  }
+				},
+				error: function (data) {
+				  debugger;
+				  alert("Error");
+				},
+			});
+			
+		});
+	</script> 
+	
 </body>
 </html>

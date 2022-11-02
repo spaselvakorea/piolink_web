@@ -93,16 +93,16 @@
 								data-buttons-toolbar=".buttons-toolbar">
 								<thead>
 									<tr>
-										<th>등록일</th>
-										<th>사이트</th>
-										<th>사용자명</th>
-										<th>IP</th>
-										<th>구분</th>
-										<th>설명</th>
+										<th data-field="ALfield001">등록일</th>
+										<th data-field="ALfield002">사이트</th>
+										<th data-field="ALfield003">사용자명</th>
+										<th data-field="ALfield004">IP</th>
+										<th data-field="ALfield005">구분</th>
+										<th data-field="ALfield006">설명</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
+									<!--<tr>
 										<td>
 											2021-11-17 10:01:22
 										</td>
@@ -121,7 +121,7 @@
 										<td>192.123.21</td>
 										<td><span class="badge bg-danger">경고</span></td>
 										<td>로그인관리(로그인): 아이디(customer)</td>
-									</tr>
+									</tr>-->
 								</tbody>
 							</table>
 						</div>
@@ -312,6 +312,21 @@
 	<script src="../assets/js/demo/common.demo.js"></script>
 	<script src="../assets/js/pages/log/analisys-log.js"></script>
 	<!-- ================== END page-js ================== -->
+	
+	<script type="text/javascript" language="javascript"> 
+		window.inspectdata;
+		function downloadObjectAsJson(exportName){
+			var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(window.inspectdata));
+			var downloadAnchorNode = document.createElement('a');
+			downloadAnchorNode.setAttribute("href",     dataStr);
+			downloadAnchorNode.setAttribute("download", exportName + ".json");
+			document.body.appendChild(downloadAnchorNode); // required for firefox
+			downloadAnchorNode.click();
+			downloadAnchorNode.remove();
+		}
+		$(document).ready(function() {  
+		});
+	</script> 
 </body>
 </html>
 
